@@ -8,7 +8,7 @@ const formData = {
   email: "",
   image: "",
 };
-export default function CreateUser({ onSubmit,setInputs,inputs }) {
+export default function CreateUser({ onSubmit }) {
   const [input, setInput] = useState(formData);
   const [gender, setGender] = useState("");
 
@@ -21,22 +21,20 @@ export default function CreateUser({ onSubmit,setInputs,inputs }) {
     const value = event.target.value;
     setInput((values) => ({ ...values, [name]: value }));
   };
-  const handleSubmit = () => {   
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log(input);
-    // onSubmit(input, gender,setGender,setInput);
-   
-      console.log(input);
-      const newInput = {
-        name: input.name,
-        phone: input.phone,
-        email: input.email,
-        Company: input.Company,
-        id: input.id,
-        gender: gender,
-        image: input.image,
-      };
-      setInputs([...inputs, newInput]);
-    
+    onSubmit(input, gender);
+    const newInput = {
+      name: input.name,
+      phone: input.phone,
+      email: input.email,
+      Company: input.Company,
+      id: input.id,
+      gender: gender,
+      image: input.image,
+    };  
+
     setGender("");
     setInput({
       name: "",
@@ -55,7 +53,7 @@ export default function CreateUser({ onSubmit,setInputs,inputs }) {
       </h1>
       <br />
 
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">
             UserName : &nbsp;
@@ -131,7 +129,8 @@ export default function CreateUser({ onSubmit,setInputs,inputs }) {
             <input
               className="form-control"
               type="tel"
-              name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              name="phone"
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
               value={input.phone}
               onChange={handleChange}
               required
@@ -161,11 +160,12 @@ export default function CreateUser({ onSubmit,setInputs,inputs }) {
               name="image"
               value={input.image}
               onChange={handleChange}
+              required
             />
           </label>
         </div>
 
-        <button  className="btn btn-primary" onClick={handleSubmit}>
+        <button className="btn btn-primary" type="submit">
           Submit
         </button>
       </form>
