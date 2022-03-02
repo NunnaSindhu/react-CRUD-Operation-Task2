@@ -8,7 +8,7 @@ const formData = {
   email: "",
   image: "",
 };
-export default function CreateUser({ onSubmit }) {
+export default function CreateUser({ onSubmit,setInputs,inputs }) {
   const [input, setInput] = useState(formData);
   const [gender, setGender] = useState("");
 
@@ -23,7 +23,20 @@ export default function CreateUser({ onSubmit }) {
   };
   const handleSubmit = () => {   
     console.log(input);
-    onSubmit(input, gender);
+    // onSubmit(input, gender,setGender,setInput);
+   
+      console.log(input);
+      const newInput = {
+        name: input.name,
+        phone: input.phone,
+        email: input.email,
+        Company: input.Company,
+        id: input.id,
+        gender: gender,
+        image: input.image,
+      };
+      setInputs([...inputs, newInput]);
+    
     setGender("");
     setInput({
       name: "",
@@ -53,7 +66,7 @@ export default function CreateUser({ onSubmit }) {
               placeholder="FullName"
               value={input.name}
               onChange={handleChange}
-              required
+              required={true}
             />
           </label>
         </div>
@@ -67,7 +80,7 @@ export default function CreateUser({ onSubmit }) {
               value="Male"
               checked={gender === "Male"}
               onChange={handlerChange}
-              required="required"
+              required
             />
 
             <label className="form-check-label">Male</label>
@@ -152,7 +165,7 @@ export default function CreateUser({ onSubmit }) {
           </label>
         </div>
 
-        <button className="btn btn-primary" onClick={handleSubmit}>
+        <button  className="btn btn-primary" onClick={handleSubmit}>
           Submit
         </button>
       </form>

@@ -12,20 +12,30 @@ export default function BodySection() {
   const [inputs, setInputs] = useState(usersData);
 
   //Create data on form submission
-  const formSubmit = (input, gender) => {
-    console.log(input);
-    const newInput = {
-      name: input.name,
-      phone: input.phone,
-      email: input.email,
-      Company: input.Company,
-      id: input.id,
-      gender: gender,
-      image: input.image,
-    };
-    setInputs([...inputs, newInput]);
-    
-  };
+  // const formSubmit = (input, gender,setGender,setInput) => {
+  //   console.log(input);
+  //   const newInput = {
+  //     name: input.name,
+  //     phone: input.phone,
+  //     email: input.email,
+  //     Company: input.Company,
+  //     id: input.id,
+  //     gender: gender,
+  //     image: input.image,
+  //   };
+  //   setInputs([...inputs, newInput]);
+  //   setInput({});
+  //   // setGender("");
+  //   // setInput({
+  //   //   name: "",
+  //   //   gender: "",
+  //   //   id: "",
+  //   //   Company: "",
+  //   //   phone: "",
+  //   //   email: "",
+  //   //   image: "",
+  //   // });
+  // };
   //Read data
   const getData = (id) => {
     return inputs.find((user) => user.id === id);
@@ -78,7 +88,7 @@ export default function BodySection() {
               />
               <Route
                 path="/pages/CreateUser"
-                element={<CreateUser onSubmit={formSubmit} />}
+                element={<CreateUser  setInputs={setInputs} inputs={inputs} />}
               />
               <Route
                 path="/pages/EditUser"
