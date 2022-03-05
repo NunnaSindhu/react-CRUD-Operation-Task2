@@ -5,12 +5,12 @@ export default function EditUser({ getData, updateData }) {
   const [newInput, setNewInput] = useState();
   const [genderValue, setGenderValue] = useState();
   const { id } = useParams();
- 
+
   //by using useParams get id of user and send it to getData function to get whole info of user
   useEffect(() => {
-    const userData = getData(id); 
-    setGenderValue(userData.gender);  
-    setNewInput(userData);    
+    const userData = getData(id);
+    setGenderValue(userData.gender);
+    setNewInput(userData);
   }, []);
 
   //radio button onchange handler function
@@ -26,17 +26,20 @@ export default function EditUser({ getData, updateData }) {
 
   //on Submit handler function
 
-  const handleSubmit = () => {    
-    updateData(newInput,genderValue);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateData(newInput, genderValue);
     setNewInput("");
     setGenderValue("");
   };
- 
+
   return (
-    //create a form to bring the the existing data in the form fields and to update the data of user 
+    //create a form to bring the the existing data in the form fields and to update the data of user
     <div>
-      <h1>Update Employee/User Details</h1><br/><br/>
-      <form onSubmit={(e) => e.preventDefault()}>
+      <h1>Update Employee/User Details</h1>
+      <br />
+      <br />
+      <form onSubmit={handleSubmit}>
         <label>
           UserName : &nbsp;
           <input
@@ -55,7 +58,7 @@ export default function EditUser({ getData, updateData }) {
             type="radio"
             name="gender"
             value="Male"
-            checked={genderValue ==='Male'}
+            checked={genderValue === "Male"}
             onChange={handlerChange}
           />
           &nbsp;Male&nbsp;&nbsp;
@@ -63,7 +66,7 @@ export default function EditUser({ getData, updateData }) {
             type="radio"
             name="gender"
             value="Female"
-            checked={genderValue ==='Female'}
+            checked={genderValue === "Female"}
             onChange={handlerChange}
           />
           &nbsp;Female
@@ -96,7 +99,7 @@ export default function EditUser({ getData, updateData }) {
         <label>
           Contact Number : &nbsp;
           <input
-            type="number"
+            type="tel"
             name="phone"
             value={newInput && newInput.phone}
             onChange={handleChange}
@@ -121,7 +124,7 @@ export default function EditUser({ getData, updateData }) {
         </label>
         <br />
         <br />
-        <button className="btn btn-primary" onClick={handleSubmit} >
+        <button className="btn btn-primary" type="submit">
           Submit
         </button>
       </form>

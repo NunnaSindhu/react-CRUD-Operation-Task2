@@ -44,7 +44,7 @@ export default function BodySection() {
   const updateData = (editedData,genderName) => {
     console.log(editedData);
     let temp = [...inputs];
-    let index = temp.findIndex((d) => d.id === editedData.id);
+    let index = temp.findIndex((item) => item.id === editedData.id);
     temp[index] = editedData;
     temp[index].gender=genderName;
     setInputs(temp);
@@ -53,10 +53,10 @@ export default function BodySection() {
   //Search Functionality
   const handleSearch = (searchData) => {
     const filteredData = inputs.filter((user) => {
-     return (user.name.toLocaleLowerCase().includes(searchData.toLocaleLowerCase()));
+     return (user.name.toLocaleLowerCase().includes(searchData.toLocaleLowerCase()||(user.id===searchData)));
     });
     console.log(filteredData);
-    setInputs(filteredData);
+    setInputs([...inputs, filteredData]);
   };
 
   return (

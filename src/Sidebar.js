@@ -60,7 +60,7 @@ export default function Sidebar() {
        className={({ isActive }) =>
        isActive ? "nav-link active" : "nav-link"
      }
-    to="/pages/EditUser"
+    to="/pages/Profile"
    
   >
     <span>Edit User</span>

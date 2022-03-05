@@ -11,8 +11,8 @@ export default function ListUsers({ usersData, handleSearch }) {
     console.log(searchData);
     if (searchData !== "") {
       handleSearch(searchData);
-      setSearchData("");
-    } else navigate("./pages/ListUsers");
+      
+    } 
   };
   return (
     <div className="container">
