@@ -1,33 +1,37 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-export default function ListUsers({ usersData, handleSearch }) {
-  const [searchData, setSearchData] = useState();
-  const navigate = useNavigate();
+
+export default function ListUsers({ usersData }) {
+  const [searchData, setSearchData] = useState("");
+
   //search for the user data
-  const searchFunction = (e) => {
-    let searchValue = e.target.value;
-    setSearchData(searchValue);
-    console.log(searchData);
-    if (searchData !== "") {
-      handleSearch(searchData);
-      
-    } 
+  const handleSearch = (listData, searchValue) => {
+    let filteredData = [];
+    if (!searchValue.trim()) {
+      filteredData = listData;
+    } else {
+      filteredData = listData.filter(
+        (item) =>
+          item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+          item.id.includes(searchValue)
+      );
+    }
+    return filteredData;
   };
   return (
     <div className="container">
       <h1>List of Users</h1>
       <br />
       <br />
-      <form className="mb-5" onSubmit={(e) => e.preventDefault()}>
-        <input
-          type="search"
-          className="form-control"
-          name="usersearch"
-          placeholder="Search here..."
-          onChange={searchFunction}
-        />
-      </form>
+
+      <input
+        type="search"
+        className="form-control mb-3"
+        name="usersearch"
+        placeholder="Search here..."
+        onChange={(e) => setSearchData(e.target.value)}
+      />
+
       <table className="table-hover">
         <thead>
           <tr>
@@ -40,7 +44,7 @@ export default function ListUsers({ usersData, handleSearch }) {
             <th>Company</th>
           </tr>
         </thead>
-        {usersData.map((user) => {
+        {handleSearch(usersData, searchData).map((user) => {
           return (
             <tbody key={user.id}>
               <tr>

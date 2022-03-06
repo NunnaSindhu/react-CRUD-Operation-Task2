@@ -50,14 +50,6 @@ export default function BodySection() {
     setInputs(temp);
   };
 
-  //Search Functionality
-  const handleSearch = (searchData) => {
-    const filteredData = inputs.filter((user) => {
-     return (user.name.toLocaleLowerCase().includes(searchData.toLocaleLowerCase()||(user.id===searchData)));
-    });
-    console.log(filteredData);
-    setInputs([...inputs, filteredData]);
-  };
 
   return (
     <div id="content-wrapper" className="d-flex flex-column">
@@ -72,7 +64,7 @@ export default function BodySection() {
               <Route
                 path="/pages/ListUsers"
                 element={
-                  <ListUsers usersData={inputs} handleSearch={handleSearch} />
+                  <ListUsers usersData={inputs} />
                 }
               />
               <Route

@@ -125,7 +125,7 @@ export default function EditUser({ getData, updateData }) {
         <br />
         <br />
         <button className="btn btn-primary" type="submit">
-          Submit
+          Update
         </button>
       </form>
     </div>
