@@ -5,7 +5,8 @@ export default function Profile({ usersData,deleteHandler }) {
     <div className="container">
       <h1>Employee List</h1>
       <br />
-      <table className="table-hover">
+      <div className="table-responsive-sm">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th>S.No</th>
@@ -43,6 +44,7 @@ export default function Profile({ usersData,deleteHandler }) {
           );
         })}
       </table>
+      </div>
     </div>
   );
 }

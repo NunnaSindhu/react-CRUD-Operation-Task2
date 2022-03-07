@@ -31,8 +31,8 @@ export default function ListUsers({ usersData }) {
         placeholder="Search here..."
         onChange={(e) => setSearchData(e.target.value)}
       />
-
-      <table className="table-hover">
+<div className="table-responsive-sm">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th>S.No</th>
@@ -60,6 +60,7 @@ export default function ListUsers({ usersData }) {
           );
         })}
       </table>
+      </div>
     </div>
   );
 }
